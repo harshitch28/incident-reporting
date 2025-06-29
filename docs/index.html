@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Reporting System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#1E40AF'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-800">Incident Reporting System</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="loginBtn" class="text-gray-600 hover:text-gray-900">Login</button>
+                    <button id="registerBtn" class="text-gray-600 hover:text-gray-900">Register</button>
+                    <button id="logoutBtn" class="hidden text-gray-600 hover:text-gray-900">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Login Section -->
+        <div id="loginSection" class="hidden">
+            <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
+                <form id="loginForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Username</label>
+                        <input type="text" id="loginUsername" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" id="loginPassword" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                        Login
+                    </button>
+                </form>
+                <div id="loginMessage" class="mt-4 text-center"></div>
+            </div>
+        </div>
+
+        <!-- Register Section -->
+        <div id="registerSection" class="hidden">
+            <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-center mb-6">Register</h2>
+                <form id="registerForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Username</label>
+                        <input type="text" id="registerUsername" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" id="registerPassword" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                        <input type="password" id="registerConfirmPassword" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Role</label>
+                        <select id="registerRole" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                            <option value="ROLE_USER">User</option>
+                            <option value="ROLE_ADMIN">Admin</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                        Register
+                    </button>
+                </form>
+                <div id="registerMessage" class="mt-4 text-center"></div>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboardSection" class="hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Report Incident -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-4">Report New Incident</h3>
+                        <form id="incidentForm" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Title</label>
+                                <input type="text" id="incidentTitle" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Description</label>
+                                <textarea id="incidentDescription" required rows="3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                                Report Incident
+                            </button>
+                        </form>
+                        <div id="incidentMessage" class="mt-4 text-center"></div>
+                    </div>
+                </div>
+
+                <!-- Incidents List -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-semibold">Incidents</h3>
+                            <button id="refreshIncidents" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-secondary">
+                                Refresh
+                            </button>
+                        </div>
+                        <div id="incidentsList" class="space-y-4">
+                            <!-- Incidents will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html> 
